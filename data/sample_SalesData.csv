@@ -1,0 +1,101 @@
+SalesOrderNumber,SalesOrderLineNumber,OrderDate,CustomerName,EmailAddress,Item,Quantity,UnitPrice,TaxAmount
+SO43738,1,2019-07-06,Melody Ramos,customer077@example.com,"Road-150 Red, 48",1,3578.27,286.2616
+SO43755,1,2019-07-08,Kayla Long,customer054@example.com,"Road-150 Red, 44",1,3578.27,286.2616
+SO43762,1,2019-07-09,Courtney Carter,customer024@example.com,"Road-150 Red, 56",1,3578.27,286.2616
+SO43989,1,2019-07-24,Kaitlyn Foster,customer050@example.com,"Road-150 Red, 48",1,3578.27,286.2616
+SO44002,1,2019-07-26,Melanie Foster,customer075@example.com,"Road-650 Black, 62",1,699.0982,55.9279
+SO44017,1,2019-07-27,Jack Young,customer045@example.com,"Road-150 Red, 62",1,3578.27,286.2616
+SO44062,1,2019-08-01,Rebecca Wright,customer082@example.com,"Road-150 Red, 62",1,3578.27,286.2616
+SO44141,1,2019-08-04,Shaun Deng,customer094@example.com,"Road-150 Red, 52",1,3578.27,286.2616
+SO44194,1,2019-08-15,Stephanie Gray,customer096@example.com,"Road-150 Red, 62",1,3578.27,286.2616
+SO44466,1,2019-09-28,Eduardo Lopez,customer037@example.com,"Road-650 Black, 60",1,699.0982,55.9279
+SO44878,1,2019-11-10,Maria Cox,customer072@example.com,"Road-150 Red, 44",1,3578.27,286.2616
+SO44903,1,2019-11-13,Carl Deng,customer012@example.com,"Road-150 Red, 52",1,3578.27,286.2616
+SO45090,1,2019-12-03,Alexandra Adams,customer005@example.com,"Road-150 Red, 62",1,3578.27,286.2616
+SO45097,1,2019-12-04,Caroline Long,customer013@example.com,"Road-150 Red, 52",1,3578.27,286.2616
+SO45419,1,2020-01-11,Alejandro Liu,customer003@example.com,"Road-150 Red, 56",1,3578.27,286.2616
+SO45580,1,2020-01-29,Cassie Andersen,customer019@example.com,"Road-150 Red, 62",1,3578.27,286.2616
+SO45644,1,2020-02-08,Casey She,customer016@example.com,"Mountain-100 Black, 44",1,3374.99,269.9992
+SO45932,1,2020-03-18,Scott Rodgers,customer090@example.com,"Road-150 Red, 62",1,3578.27,286.2616
+SO46011,1,2020-03-30,Deborah Goel,customer032@example.com,"Mountain-100 Black, 48",1,3374.99,269.9992
+SO46403,1,2020-05-02,Nelson Ramos,customer079@example.com,"Road-150 Red, 56",1,3578.27,286.2616
+SO46520,1,2020-05-19,Kaitlyn Russell,customer051@example.com,"Road-150 Red, 48",1,3578.27,286.2616
+SO46540,1,2020-05-22,Shannon Ruiz,customer092@example.com,"Road-150 Red, 56",1,3578.27,286.2616
+SO46598,1,2020-05-30,Evelyn Chandra,customer038@example.com,"Road-150 Red, 44",1,3578.27,286.2616
+SO46687,1,2020-06-02,Adriana Martinez,customer002@example.com,"Road-250 Black, 58",1,2181.5625,174.525
+SO46857,1,2020-06-21,Dalton Parker,customer027@example.com,"Road-250 Red, 58",1,2181.5625,174.525
+SO47213,1,2020-07-18,Laura Xu,customer061@example.com,"Road-250 Black, 52",1,2181.5625,174.525
+SO47503,1,2020-08-09,Carrie Browning,customer015@example.com,"Road-550-W Yellow, 40",1,1000.4375,80.035
+SO47530,1,2020-08-12,Alexandria Gonzales,customer006@example.com,"Road-650 Red, 48",1,782.99,62.6392
+SO47832,1,2020-09-14,Alexia Coleman,customer007@example.com,"Road-250 Red, 48",1,2443.35,195.468
+SO48222,1,2020-10-23,Brianna Torres,customer011@example.com,"Road-550-W Yellow, 38",1,1000.4375,80.035
+SO48551,1,2020-11-13,Douglas Sai,customer035@example.com,"Road-650 Red, 52",1,782.99,62.6392
+SO48720,1,2020-11-29,Latoya Tang,customer059@example.com,"Road-250 Red, 58",1,2181.5625,174.525
+SO48817,1,2020-12-03,Christopher White,customer021@example.com,"Road-250 Black, 44",1,2181.5625,174.525
+SO48999,1,2020-12-26,Terrence Yuan,customer098@example.com,"Road-250 Black, 52",1,2181.5625,174.525
+SO49252,1,2021-01-08,Brianna Sanchez,customer010@example.com,"Mountain-200 Silver, 38",1,2071.4196,165.7136
+SO49368,1,2021-01-20,Lucas Ramirez,customer066@example.com,"Road-650 Red, 62",1,782.99,62.6392
+SO49652,1,2021-02-09,Deanna Weber,customer031@example.com,"Mountain-200 Black, 46",1,2049.0982,163.9279
+SO50833,1,2021-05-07,Crystal Xu,customer025@example.com,"Mountain-200 Silver, 42",1,2071.4196,165.7136
+SO50945,1,2021-05-17,Lindsay Sharma,customer064@example.com,"Road-250 Red, 58",1,2181.5625,174.525
+SO50989,1,2021-05-21,Roy Ramos,customer085@example.com,"Road-250 Red, 58",1,2181.5625,174.525
+SO51182,1,2021-05-31,Lauren Washington,customer062@example.com,"Road-350-W Yellow, 42",1,1700.99,136.0792
+SO51587,1,2021-06-25,Dana Gill,customer028@example.com,"Road-250 Black, 52",1,2443.35,195.468
+SO51620,4,2021-06-27,Chad Luo,customer020@example.com,"Short-Sleeve Classic Jersey, S",1,53.99,4.3192
+SO51688,1,2021-06-30,Diana Rubio,customer034@example.com,"Touring-2000 Blue, 60",1,1214.85,97.188
+SO51964,1,2021-07-02,Mandy Wu,customer069@example.com,"Road-250 Black, 44",1,2443.35,195.468
+SO52465,1,2021-07-12,Lydia Chandra,customer067@example.com,"Road-750 Black, 44",1,539.99,43.1992
+SO52498,1,2021-07-13,Samuel Turner,customer088@example.com,"Women's Mountain Shorts, M",1,69.99,5.5992
+SO52541,2,2021-07-14,Isaiah Phillips,customer044@example.com,"Long-Sleeve Logo Jersey, XL",1,49.99,3.9992
+SO52787,2,2021-07-19,Virginia Sai,customer099@example.com,Bike Wash - Dissolver,1,7.95,0.636
+SO52912,2,2021-07-21,Seth Edwards,customer091@example.com,Mountain Tire Tube,1,4.99,0.3992
+SO52997,1,2021-07-23,Amber Collins,customer009@example.com,"Mountain-500 Silver, 52",1,564.99,45.1992
+SO53217,2,2021-07-27,Alexa Kelly,customer004@example.com,"Sport-100 Helmet, Blue",1,34.99,2.7992
+SO53269,4,2021-07-28,Abigail Garcia,customer001@example.com,"Long-Sleeve Logo Jersey, M",1,49.99,3.9992
+SO53363,4,2021-07-30,Kimberly Brooks,customer058@example.com,"Half-Finger Gloves, M",1,24.49,1.9592
+SO53965,1,2021-08-07,Steven Kelly,customer097@example.com,"Mountain-200 Black, 46",1,2294.99,183.5992
+SO54067,4,2021-08-09,Meagan Kim,customer073@example.com,"Short-Sleeve Classic Jersey, L",1,53.99,4.3192
+SO54143,2,2021-08-10,Garrett Watson,customer042@example.com,AWC Logo Cap,1,8.99,0.7192
+SO54305,4,2021-08-13,Nicole Bailey,customer080@example.com,AWC Logo Cap,1,8.99,0.7192
+SO54442,2,2021-08-16,Marcus Cooper,customer071@example.com,Patch Kit/8 Patches,1,2.29,0.1832
+SO54563,3,2021-08-18,Molly Sanchez,customer078@example.com,Bike Wash - Dissolver,1,7.95,0.636
+SO54653,1,2021-08-19,Kevin Sharma,customer057@example.com,"Road-550-W Yellow, 44",1,1120.49,89.6392
+SO54706,1,2021-08-20,Curtis Lu,customer026@example.com,"Touring-1000 Blue, 50",1,2384.07,190.7256
+SO54886,4,2021-08-24,Gabriel Parker,customer039@example.com,"Racing Socks, L",1,8.99,0.7192
+SO55052,2,2021-08-27,Connor Henderson,customer023@example.com,"Racing Socks, L",1,8.99,0.7192
+SO55130,1,2021-08-28,Kaitlyn Hughes,customer049@example.com,"Road-250 Black, 52",1,2443.35,195.468
+SO55673,1,2021-09-05,Spencer Bryant,customer095@example.com,"Touring-1000 Yellow, 50",1,2384.07,190.7256
+SO55679,1,2021-09-05,Laura Liu,customer060@example.com,"Road-550-W Yellow, 44",1,1120.49,89.6392
+SO56181,2,2021-09-14,Gabrielle Simmons,customer041@example.com,"Touring-1000 Blue, 50",1,2384.07,190.7256
+SO56667,2,2021-09-24,Casey Jai,customer017@example.com,"Sport-100 Helmet, Black",1,34.99,2.7992
+SO57010,1,2021-09-30,Allen Garcia,customer008@example.com,"Road-750 Black, 58",1,539.99,43.1992
+SO57415,1,2021-10-04,Cassandra Fernandez,customer018@example.com,"Road-350-W Yellow, 40",1,1700.99,136.0792
+SO57542,1,2021-10-07,Carolyn Fernandez,customer014@example.com,Mountain Bottle Cage,1,9.99,0.7992
+SO57599,3,2021-10-08,Jermaine Rodriguez,customer048@example.com,"Half-Finger Gloves, M",1,24.49,1.9592
+SO57845,1,2021-10-13,Darrell Raji,customer029@example.com,"Mountain-200 Black, 42",1,2294.99,183.5992
+SO58311,1,2021-10-21,Kayla Miller,customer055@example.com,Water Bottle - 30 oz.,1,4.99,0.3992
+SO58389,2,2021-10-22,Jeffery Liang,customer047@example.com,"Long-Sleeve Logo Jersey, M",1,49.99,3.9992
+SO58582,2,2021-10-25,Shaun Chapman,customer093@example.com,Water Bottle - 30 oz.,1,4.99,0.3992
+SO58798,1,2021-10-29,Madison Hall,customer068@example.com,Mountain Tire Tube,1,4.99,0.3992
+SO58841,2,2021-10-30,Christy Rai,customer022@example.com,Mountain Tire Tube,1,4.99,0.3992
+SO59119,1,2021-10-31,Katelyn Hill,customer053@example.com,"Touring-3000 Blue, 50",1,742.35,59.388
+SO59479,5,2021-11-05,Roger Nara,customer084@example.com,"Sport-100 Helmet, Black",1,34.99,2.7992
+SO59629,1,2021-11-07,Leonard Anand,customer063@example.com,"Mountain-400-W Silver, 40",1,769.49,61.5592
+SO59633,1,2021-11-07,Renee Martin,customer083@example.com,"Road-550-W Yellow, 44",1,1120.49,89.6392
+SO59958,3,2021-11-12,Roy Rubio,customer086@example.com,AWC Logo Cap,1,8.99,0.7192
+SO60374,1,2021-11-18,Pedro Ruiz,customer081@example.com,"Road-550-W Yellow, 44",1,1120.49,89.6392
+SO60672,2,2021-11-23,Kaylee Young,customer056@example.com,Mountain Tire Tube,1,4.99,0.3992
+SO60732,3,2021-11-24,Yolanda Xu,customer100@example.com,AWC Logo Cap,1,8.99,0.7192
+SO60769,3,2021-11-25,Kari Lopez,customer052@example.com,Bike Wash - Dissolver,1,7.95,0.636
+SO60916,1,2021-11-27,Ruben Ruiz,customer087@example.com,ML Road Tire,1,24.99,1.9992
+SO61088,1,2021-11-29,Gabriel Adams,customer040@example.com,"Road-550-W Yellow, 44",1,1120.49,89.6392
+SO61827,2,2021-12-10,Diana Suarez,customer033@example.com,AWC Logo Cap,1,8.99,0.7192
+SO62085,1,2021-12-14,Louis Luo,customer065@example.com,"Touring-1000 Yellow, 50",1,2384.07,190.7256
+SO62223,1,2021-12-16,Marcus Lewis,customer070@example.com,"Touring-2000 Blue, 46",1,1214.85,97.188
+SO62405,1,2021-12-20,Darren Prasad,customer030@example.com,Patch Kit/8 Patches,1,2.29,0.1832
+SO62625,2,2021-12-23,Gerrit Straatsma,customer043@example.com,Water Bottle - 30 oz.,1,4.99,0.3992
+SO62761,1,2021-12-26,Jaclyn Tang,customer046@example.com,"Road-350-W Yellow, 48",1,1700.99,136.0792
+SO62815,2,2021-12-26,Dustin Chander,customer036@example.com,"Sport-100 Helmet, Black",1,34.99,2.7992
+SO62888,1,2021-12-28,Megan Rodriguez,customer074@example.com,Patch Kit/8 Patches,1,2.29,0.1832
+SO62897,1,2021-12-28,Sara Phillips,customer089@example.com,Mountain Tire Tube,1,4.99,0.3992
+SO63041,2,2021-12-30,Melinda Romero,customer076@example.com,"Long-Sleeve Logo Jersey, L",1,49.99,3.9992

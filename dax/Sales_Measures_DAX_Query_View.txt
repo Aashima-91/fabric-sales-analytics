@@ -1,0 +1,58 @@
+// Paste into: Sales_Reporting_Model -> DAX query view (switch the model to Editing mode first).
+// Then click "Update model: Add new measures" above the DEFINE block (or "Update model with changes").
+// Your 4 core measures (Units Sold, Order Count, Gross Sales, Tax Amount) already exist, so they are not repeated.
+// Run the Dim_Date steps BEFORE adding the "Time intelligence" section, or delete that section for now.
+
+DEFINE
+    // ---------- Ratios and averages ----------
+    MEASURE Fact_Sales[Avg Order Value] = DIVIDE ( [Gross Sales], [Order Count] )
+    MEASURE Fact_Sales[Avg Unit Price] = DIVIDE ( [Gross Sales], [Units Sold] )
+    MEASURE Fact_Sales[Tax %] = DIVIDE ( [Tax Amount], [Gross Sales] )
+    MEASURE Fact_Sales[Customers] = DISTINCTCOUNT ( Fact_Sales[CustomerID] )
+    MEASURE Fact_Sales[Sales per Customer] = DIVIDE ( [Gross Sales], [Customers] )
+    MEASURE Fact_Sales[Units per Order] = DIVIDE ( [Units Sold], [Order Count] )
+
+    // ---------- Share and ranking ----------
+    MEASURE Fact_Sales[Sales % of Total] =
+        DIVIDE ( [Gross Sales], CALCULATE ( [Gross Sales], ALLSELECTED () ) )
+    MEASURE Fact_Sales[Item Rank (Units)] =
+        RANKX ( ALLSELECTED ( Dim_Item[ItemName] ), [Units Sold], , DESC, DENSE )
+    MEASURE Fact_Sales[Customer Rank (Sales)] =
+        RANKX ( ALLSELECTED ( Dim_Customer[CustomerName] ), [Gross Sales], , DESC, DENSE )
+
+    // ---------- Time intelligence (needs Dim_Date related and marked as date table) ----------
+    MEASURE Fact_Sales[Sales PY] =
+        CALCULATE ( [Gross Sales], SAMEPERIODLASTYEAR ( Dim_Date[DateKey] ) )
+    MEASURE Fact_Sales[YoY %] =
+        VAR _py = [Sales PY]
+        RETURN IF ( NOT ISBLANK ( _py ), DIVIDE ( [Gross Sales] - _py, _py ) )
+    MEASURE Fact_Sales[Sales YTD] = TOTALYTD ( [Gross Sales], Dim_Date[DateKey] )
+    MEASURE Fact_Sales[Sales MTD] = TOTALMTD ( [Gross Sales], Dim_Date[DateKey] )
+    MEASURE Fact_Sales[Sales Prev Month] =
+        CALCULATE ( [Gross Sales], DATEADD ( Dim_Date[DateKey], -1, MONTH ) )
+    MEASURE Fact_Sales[MoM %] =
+        VAR _pm = [Sales Prev Month]
+        RETURN IF ( NOT ISBLANK ( _pm ), DIVIDE ( [Gross Sales] - _pm, _pm ) )
+    MEASURE Fact_Sales[Sales Rolling 3M] =
+        CALCULATE (
+            [Gross Sales],
+            DATESINPERIOD ( Dim_Date[DateKey], MAX ( Dim_Date[DateKey] ), -3, MONTH )
+        )
+
+    // ---------- Dynamic text ----------
+    MEASURE Fact_Sales[Data Through] =
+        "Data through " & FORMAT ( CALCULATE ( MAX ( Fact_Sales[OrderDate] ), ALL ( Fact_Sales ) ), "d mmm yyyy" )
+    MEASURE Fact_Sales[Top Item] =
+        MAXX ( TOPN ( 1, ALLSELECTED ( Dim_Item[ItemName] ), [Gross Sales], DESC ), Dim_Item[ItemName] )
+    MEASURE Fact_Sales[Peak Month] =
+        MAXX ( TOPN ( 1, ALLSELECTED ( Dim_Date[YearMonth] ), [Gross Sales], DESC ), Dim_Date[YearMonth] )
+    MEASURE Fact_Sales[Takeaway] =
+        "Sales peaked in " & [Peak Month] & ", led by " & [Top Item] & ". Avg order value: "
+            & FORMAT ( [Avg Order Value], "$#,##0" ) & "."
+
+    // ---------- Conditional formatting helpers ----------
+    MEASURE Fact_Sales[YoY Colour] =
+        SWITCH ( TRUE (), ISBLANK ( [YoY %] ), "#888780", [YoY %] >= 0, "#0F6E56", "#A32D2D" )
+
+EVALUATE
+ROW ( "Check", [Avg Order Value] )

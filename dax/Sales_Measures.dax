@@ -1,0 +1,172 @@
+// =====================================================================
+// Sales_Reporting_Model: measures for the Sales Performance Report
+// Create each with: semantic model editor -> select Fact_Sales -> New measure
+// (or paste several at once in the TMDL / DAX query view).
+// Table names assume no schema prefix, as in your model (Fact_Sales, Dim_Customer, Dim_Item, Dim_Date).
+// Prerequisites: Dim_Date added to the model (see Dim_Date.sql), related to Fact_Sales[OrderDate]
+// and marked as the date table.
+// =====================================================================
+
+
+// ---------- 1. Core measures (you already have these four) ----------
+Units Sold   = SUM ( Fact_Sales[Quantity] )
+
+Order Count  = DISTINCTCOUNT ( Fact_Sales[SalesOrderNumber] )
+
+Gross Sales  = SUMX ( Fact_Sales, Fact_Sales[Quantity] * Fact_Sales[UnitPrice] )
+
+Tax Amount   = SUM ( Fact_Sales[TaxAmount] )
+
+
+// ---------- 2. Ratios and averages ----------
+Avg Order Value  = DIVIDE ( [Gross Sales], [Order Count] )
+
+Avg Unit Price   = DIVIDE ( [Gross Sales], [Units Sold] )
+
+Tax %            = DIVIDE ( [Tax Amount], [Gross Sales] )
+
+Customers        = DISTINCTCOUNT ( Fact_Sales[CustomerID] )
+
+Sales per Customer = DIVIDE ( [Gross Sales], [Customers] )
+
+Units per Order  = DIVIDE ( [Units Sold], [Order Count] )
+
+
+// ---------- 3. Time intelligence (needs Dim_Date) ----------
+Sales PY =
+CALCULATE ( [Gross Sales], SAMEPERIODLASTYEAR ( Dim_Date[DateKey] ) )
+
+YoY % =
+VAR _py = [Sales PY]
+RETURN
+    IF ( NOT ISBLANK ( _py ), DIVIDE ( [Gross Sales] - _py, _py ) )
+
+Sales YTD =
+TOTALYTD ( [Gross Sales], Dim_Date[DateKey] )
+
+Sales MTD =
+TOTALMTD ( [Gross Sales], Dim_Date[DateKey] )
+
+Sales Prev Month =
+CALCULATE ( [Gross Sales], DATEADD ( Dim_Date[DateKey], -1, MONTH ) )
+
+MoM % =
+VAR _pm = [Sales Prev Month]
+RETURN
+    IF ( NOT ISBLANK ( _pm ), DIVIDE ( [Gross Sales] - _pm, _pm ) )
+
+Sales Rolling 3M =
+CALCULATE (
+    [Gross Sales],
+    DATESINPERIOD ( Dim_Date[DateKey], MAX ( Dim_Date[DateKey] ), -3, MONTH )
+)
+
+
+// ---------- 4. Share and ranking ----------
+Sales % of Total =
+DIVIDE ( [Gross Sales], CALCULATE ( [Gross Sales], ALLSELECTED () ) )
+
+Item Rank (Units) =
+RANKX ( ALLSELECTED ( Dim_Item[ItemName] ), [Units Sold], , DESC, DENSE )
+
+Customer Rank (Sales) =
+RANKX ( ALLSELECTED ( Dim_Customer[CustomerName] ), [Gross Sales], , DESC, DENSE )
+
+
+// ---------- 5. Dynamic text for headers and the takeaway box ----------
+Data Through =
+"Data through " & FORMAT ( CALCULATE ( MAX ( Fact_Sales[OrderDate] ), ALL ( Fact_Sales ) ), "d mmm yyyy" )
+
+Top Item =
+VAR _t =
+    TOPN ( 1, ALLSELECTED ( Dim_Item[ItemName] ), [Gross Sales], DESC )
+RETURN
+    MAXX ( _t, Dim_Item[ItemName] )
+
+Peak Month =
+VAR _t =
+    TOPN ( 1, ALLSELECTED ( Dim_Date[YearMonth] ), [Gross Sales], DESC )
+RETURN
+    MAXX ( _t, Dim_Date[YearMonth] )
+
+Takeaway =
+"Sales peaked in " & [Peak Month] & ", led by " & [Top Item] & ". "
+    & "Avg order value: " & FORMAT ( [Avg Order Value], "$#,##0" ) & "."
+
+
+// ---------- 6. Conditional formatting helpers ----------
+// Use as "Field value" for font/data-label colour on the YoY card or table.
+YoY Colour =
+VAR _y = [YoY %]
+RETURN
+    SWITCH ( TRUE (), ISBLANK ( _y ), "#888780", _y >= 0, "#0F6E56", "#A32D2D" )
+
+// Arrow for a card callout.
+YoY Arrow =
+VAR _y = [YoY %]
+RETURN
+    SWITCH ( TRUE (), ISBLANK ( _y ), "", _y >= 0, "▲ ", "▼ " )
+
+
+// =====================================================================
+// Model settings checklist
+// =====================================================================
+// Dim_Date[MonthName]      -> Sort by column: MonthNumber
+// Dim_Date[MonthShort]     -> Sort by column: MonthNumber
+// Dim_Date[YearMonth]      -> Sort by column: YearMonthSort
+// Dim_Date[QuarterName]    -> Sort by column: QuarterNumber
+// Dim_Date[DayName]        -> Sort by column: DayOfWeekNumber
+// Dim_Date                 -> Mark as date table (DateKey)
+// Fact_Sales[Year], [Month], [Quantity], [UnitPrice], [TaxAmount], [SalesOrderLineNumber]
+//                          -> Summarize by: None (stops "Sum of Month" charts)
+// Hide from report view: Fact_Sales[CustomerID], [ItemID], [Year], [Month],
+//                        Dim_Customer[CustomerID], [EmailAddress], Dim_Item[ItemID]
+// Formats: Gross Sales / Avg Order Value / Sales PY / Sales YTD -> Currency, 0 decimals
+//          YoY %, MoM %, Tax %, Sales % of Total                  -> Percentage, 1 decimal
+//
+// Tips
+// - YoY % is blank for 2019 (no prior year) which is correct. Default the Year slicer to 2021
+//   so the cards show a full comparison year, and note that 2019-2020 hold few rows.
+// - Top Item / Peak Month: use them in a text box via the "fx" button (dynamic value) or a card
+//   with the Takeaway measure.
+// - Unicode arrows in YoY Arrow: if your tenant's DAX editor rejects them, replace with "+" / "-".
+
+
+// =====================================================================
+// Report-specific measures used by the dashboard
+// =====================================================================
+
+// Subtitle card on the overview page
+Date Range =
+FORMAT ( MIN ( Fact_Sales[OrderDate] ), "mmm yyyy" ) & " to " & FORMAT ( MAX ( Fact_Sales[OrderDate] ), "mmm yyyy" )
+
+// Dynamic title for the drillable trend chart. Reads the filters that drilling applies,
+// so use the single down-arrow drill mode (the "expand all" fork does not apply filters).
+Trend Title =
+VAR _y = SELECTEDVALUE ( Dim_Date[Year] )
+VAR _q = SELECTEDVALUE ( Dim_Date[QuarterName] )
+RETURN
+    SWITCH (
+        TRUE (),
+        NOT ISBLANK ( _q ), "Gross sales by month, " & _q & " " & _y,
+        NOT ISBLANK ( _y ), "Gross sales by quarter, " & _y,
+        "Gross sales by year"
+    )
+
+// Row-relative heatmap shading for the drill-down matrix: each cell as a share of its own
+// row's peak month. Both MonthNumber and MonthShort are cleared because MonthShort is
+// sorted by MonthNumber, so a cell is filtered by both columns.
+Heat Index =
+VAR _cur = [Gross Sales]
+VAR _peak =
+    MAXX (
+        ALL ( Dim_Date[MonthNumber], Dim_Date[MonthShort] ),
+        [Gross Sales]
+    )
+RETURN
+    DIVIDE ( _cur, _peak )
+
+// Fixed-year growth, if you add a growth card: 2019 is a partial year, so compare 2020 to 2021.
+Sales 2020 = CALCULATE ( [Gross Sales], Dim_Date[Year] = 2020 )
+Sales 2021 = CALCULATE ( [Gross Sales], Dim_Date[Year] = 2021 )
+Growth 2020 to 2021 = DIVIDE ( [Sales 2021] - [Sales 2020], [Sales 2020] )

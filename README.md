@@ -2,7 +2,9 @@
 
 ## Overview
 
-Built an end-to-end sales analytics solution in Microsoft Fabric that transforms 32,718 sales transactions into actionable business insights.
+An end-to-end analytics solution built in Microsoft Fabric. A 32,718-line sales CSV is ingested into a Lakehouse, cleaned with PySpark, enriched with Dataflow Gen2, modelled as a star schema in a Warehouse, and served through a semantic model to a two-page Power BI report covering $20.9M of revenue.
+
+> Portfolio: https://aashima-91.github.io/aashimagupta.github.io/
 
 ### Tech Stack
 
@@ -12,15 +14,24 @@ Built an end-to-end sales analytics solution in Microsoft Fabric that transforms
 - PySpark
 - Dataflow Gen2
 - Data Warehouse
+- Semantic Model
 - Power BI
 - DAX
 - T-SQL
 
 ---
 
+PDF export: docs/Sales_Dashboard.pdf
+
+Overview page: KPI cards (gross sales, units sold, order count, average order value, tax), top 5 items, a gross sales trend you can drill from year to quarter to month (the title changes with the drill level), quarterly sales, and a top 10 customers table with data bars.
+
+Drill-down page: a category and subcategory heatmap by month, a decomposition tree, a customer detail table (a drill-through target) and a scatter plot of units sold against gross sales per item, coloured by category.
+
+---
+
 ## Architecture
 
-![Architecture](images/fabric_sales_pipeline_architecture.png)
+![Architecture](docs/architecture.png)
 
 ---
 
@@ -58,15 +69,23 @@ Implemented an end-to-end analytics platform in Microsoft Fabric:
 
 ---
 
+Data
+
+The pipeline loads the companion SalesData.csv. That file is an exact file-extension conversion of the project's RawGithubUserContent.txt, not a fabricated dataset, and it must be loaded unedited and unanonymised to reproduce the expected counts (32,718 rows; 1,201 / 2,733 / 28,784 by year). It has nine columns and covers 1 July 2019 to 31 December 2021. Customer details look synthetic (emails use the adventure-works.com domain).
+
+The full file is not included in this repository. data/sample_SalesData.csv is a modified 100-row stratified sample (emails replaced by customerNNN@example.com) for illustration only; it will not reproduce the counts or dashboard figures. See data/data_dictionary.md for every column and table.
+
+---
+
 ## Dashboard
 
 ## Overview Page
 
-![Overview Dashboard](images/overview_dashboard.png)
+![Overview Dashboard](docs/dashboard-overview.png)
 
 ## Drilldown Page
 
-![Drilldown Dashboard](images/drilldown_dashboard.png)
+![Drilldown Dashboard](docs/dashboard-drilldown.png)
 
 ---
 
